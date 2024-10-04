@@ -7,7 +7,7 @@ fichero_csv = None
 host = '98.83.127.213'
 port = 8006  
 database = 'gestion'
-user = 'root'
+user = 'postgres'
 password = 'utec'
 tabla = 'producto'
 
