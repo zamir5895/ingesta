@@ -8,7 +8,7 @@ mongo_db = 'compras'
 mongo_collection = 'detallecarritos'
 
 # Parámetros para S3
-nombre_bucket = "contenedor1zamir"
+nombre_bucket = "contenedor3zamir"
 fichero_carritos = 'detallecarritos.csv'
 fichero_productos = 'productos_carrito.csv'
 
