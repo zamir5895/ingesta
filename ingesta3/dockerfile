@@ -1,9 +1,19 @@
-FROM python:3-slim
+# Utiliza una versión estable de Python 3
+FROM python:3.10-slim
 
+# Instala las bibliotecas necesarias de PostgreSQL
+RUN apt-get update && apt-get install -y \
+    libpq-dev \
+    gcc
+
+# Establece el directorio de trabajo dentro del contenedor
 WORKDIR /programas/ingesta
 
-RUN pip3 install boto3 pymongo
+# Instala las dependencias necesarias: boto3 para S3 y psycopg2-binary para PostgreSQL
+RUN pip3 install boto3 psycopg2-binary
 
+# Copia todos los archivos del directorio actual en el contenedor
 COPY . .
 
-CMD [ "python3", "./ingesta3.py" ]
+# Ejecuta el script de ingesta
+CMD [ "python3", "./ingesta2.py" ]

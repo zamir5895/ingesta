@@ -9,7 +9,8 @@ mongo_collection = 'detallecarritos'
 
 # Parámetros para S3
 nombre_bucket = "contenedor3zamir"
-fichero_carritos = 'detallecarritos.csv'
+fichero_carritos_total = 'detallecarritos_total.csv'
+fichero_carritos_detalles = 'detallecarritos_detalles.csv'
 fichero_productos = 'productos_carrito.csv'
 
 # Conectar a MongoDB
@@ -22,17 +23,28 @@ try:
     # Extraer datos de la colección
     registros = list(collection.find())
 
-    # Generar archivo CSV para detallecarritos
-    with open(fichero_carritos, 'w', newline='') as archivo_carritos:
-        escritor_carritos = csv.writer(archivo_carritos)
-        escritor_carritos.writerow(['detallecarrito_id', 'total'])  # Encabezado
+    # Generar archivo CSV para detallecarritos (total por carrito)
+    with open(fichero_carritos_total, 'w', newline='') as archivo_carritos_total:
+        escritor_carritos_total = csv.writer(archivo_carritos_total)
+        escritor_carritos_total.writerow(['detallecarrito_id', 'total'])  # Encabezado
 
         for registro in registros:
-            escritor_carritos.writerow([registro['_id'], registro['total']])
+            escritor_carritos_total.writerow([registro['_id'], registro['total']])
 
-    print(f'Registros de detallecarritos guardados en {fichero_carritos}')
+    print(f'Registros de totales de detallecarritos guardados en {fichero_carritos_total}')
 
-    # Generar archivo CSV para productos
+    # Generar archivo CSV para detallecarritos (detalles por producto en cada carrito)
+    with open(fichero_carritos_detalles, 'w', newline='') as archivo_carritos_detalles:
+        escritor_carritos_detalles = csv.writer(archivo_carritos_detalles)
+        escritor_carritos_detalles.writerow(['detallecarrito_id', 'producto_id', 'cantidad', 'precioUnitario'])  # Encabezado
+
+        for registro in registros:
+            for producto in registro['productos']:
+                escritor_carritos_detalles.writerow([registro['_id'], producto['producto_id'], producto['cantidad'], producto['precioUnitario']])
+
+    print(f'Registros de detalles de detallecarritos guardados en {fichero_carritos_detalles}')
+
+    # Generar archivo CSV para productos del carrito
     with open(fichero_productos, 'w', newline='') as archivo_productos:
         escritor_productos = csv.writer(archivo_productos)
         escritor_productos.writerow(['producto_id', 'cantidad', 'precioUnitario', 'detallecarrito_id'])  # Encabezado
@@ -46,19 +58,32 @@ try:
 except Exception as e:
     print(f'Error al conectar a MongoDB o al generar los CSV: {e}')
 
-# Subir archivos a S3 si se han generado correctamente
+# Subir archivos a S3 en directorios separados
 s3 = boto3.client('s3')
 
-if fichero_carritos:
+# Subir CSV de totales de detallecarritos
+if fichero_carritos_total:
     try:
-        s3.upload_file(fichero_carritos, nombre_bucket, fichero_carritos)
-        print(f'Archivo {fichero_carritos} subido al bucket {nombre_bucket}')
+        ruta_s3_carritos_total = f'detallecarritos_total/{fichero_carritos_total}'
+        s3.upload_file(fichero_carritos_total, nombre_bucket, ruta_s3_carritos_total)
+        print(f'Archivo {fichero_carritos_total} subido al bucket en la ruta {ruta_s3_carritos_total}')
     except Exception as e:
-        print(f'Error al subir {fichero_carritos} a S3: {e}')
+        print(f'Error al subir {fichero_carritos_total} a S3: {e}')
 
+# Subir CSV de detalles de detallecarritos
+if fichero_carritos_detalles:
+    try:
+        ruta_s3_carritos_detalles = f'detallecarritos_detalles/{fichero_carritos_detalles}'
+        s3.upload_file(fichero_carritos_detalles, nombre_bucket, ruta_s3_carritos_detalles)
+        print(f'Archivo {fichero_carritos_detalles} subido al bucket en la ruta {ruta_s3_carritos_detalles}')
+    except Exception as e:
+        print(f'Error al subir {fichero_carritos_detalles} a S3: {e}')
+
+# Subir CSV de productos del carrito
 if fichero_productos:
     try:
-        s3.upload_file(fichero_productos, nombre_bucket, fichero_productos)
-        print(f'Archivo {fichero_productos} subido al bucket {nombre_bucket}')
+        ruta_s3_productos = f'productos_carrito/{fichero_productos}'
+        s3.upload_file(fichero_productos, nombre_bucket, ruta_s3_productos)
+        print(f'Archivo {fichero_productos} subido al bucket en la ruta {ruta_s3_productos}')
     except Exception as e:
         print(f'Error al subir {fichero_productos} a S3: {e}')

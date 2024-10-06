@@ -1,0 +1,35 @@
+[
+    {
+      "Name": "pedidoId",
+      "Type": "int"
+    },
+    {
+      "Name": "fechaPedido",
+      "Type": "timestamp"
+    },
+    {
+      "Name": "fechaEntrega",
+      "Type": "timestamp"
+    },
+    {
+      "Name": "estado",
+      "Type": "string"
+    },
+    {
+      "Name": "total",
+      "Type": "decimal(9,2)"
+    },
+    {
+      "Name": "observaciones",
+      "Type": "string"
+    },
+    {
+      "Name": "usuario_id",
+      "Type": "int"
+    },
+    {
+      "Name": "direccion_id",
+      "Type": "int"
+    }
+  ]
+  
