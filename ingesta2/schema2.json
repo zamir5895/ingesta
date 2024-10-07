@@ -1,0 +1,31 @@
+[
+    {
+      "Name": "id",
+      "Type": "bigint"
+    },
+    {
+      "Name": "cantidad_reseñas",
+      "Type": "integer"
+    },
+    {
+      "Name": "descripcion",
+      "Type": "string"
+    },
+    {
+      "Name": "nombre",
+      "Type": "string"
+    },
+    {
+      "Name": "precio",
+      "Type": "double"
+    },
+    {
+      "Name": "stock",
+      "Type": "integer"
+    },
+    {
+      "Name": "categoria_id",
+      "Type": "integer"
+    }
+  ]
+  

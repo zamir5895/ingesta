@@ -1,0 +1,47 @@
+[
+    {
+      "Name": "direccionId",
+      "Type": "bigint"
+    },
+    {
+      "Name": "usuario_id",
+      "Type": "bigint"
+    },
+    {
+      "Name": "direccion",
+      "Type": "string"
+    },
+    {
+      "Name": "distrito",
+      "Type": "string"
+    },
+    {
+      "Name": "provincia",
+      "Type": "string"
+    },
+    {
+      "Name": "departamento",
+      "Type": "string"
+    },
+    {
+      "Name": "pais",
+      "Type": "string"
+    },
+    {
+      "Name": "codigoPostal",
+      "Type": "string"
+    },
+    {
+      "Name": "instrucciones",
+      "Type": "string"
+    },
+    {
+      "Name": "latitud",
+      "Type": "float"
+    },
+    {
+      "Name": "longitud",
+      "Type": "float"
+    }
+  ]
+  

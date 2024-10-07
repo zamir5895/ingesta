@@ -1,0 +1,19 @@
+[
+    {
+      "Name": "id",
+      "Type": "bigint"
+    },
+    {
+      "Name": "descripcion",
+      "Type": "string"
+    },
+    {
+      "Name": "nombre",
+      "Type": "string"
+    },
+    {
+      "Name": "total_productos",
+      "Type": "integer"
+    }
+  ]
+  

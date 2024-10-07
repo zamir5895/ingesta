@@ -1,0 +1,19 @@
+[
+    {
+      "Name": "producto_id",
+      "Type": "bigint"
+    },
+    {
+      "Name": "cantidad",
+      "Type": "int"
+    },
+    {
+      "Name": "precioUnitario",
+      "Type": "float"
+    },
+    {
+      "Name": "id",
+      "Type": "string"
+    }
+  ]
+  

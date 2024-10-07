@@ -1,0 +1,22 @@
+[
+    {
+      "Name": "id",
+      "Type": "bigint"
+    },
+    {
+      "Name": "calificacion",
+      "Type": "int"
+    },
+    {
+      "Name": "comentario",
+      "Type": "string"
+    },
+    {
+      "Name": "usuario_id",
+      "Type": "bigint"
+    },
+    {
+      "Name": "producto_id",
+      "Type": "bigint"
+    }
+  ]

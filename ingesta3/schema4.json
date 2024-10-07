@@ -1,0 +1,23 @@
+[
+    {
+      "Name": "id",
+      "Type": "string"
+    },
+    {
+      "Name": "usuario_id",
+      "Type": "bigint"
+    },
+    {
+      "Name": "carritoDetalle_id",
+      "Type": "string"
+    },
+    {
+      "Name": "estado",
+      "Type": "string"
+    },
+    {
+      "Name": "fecha",
+      "Type": "date"
+    }
+  ]
+  
